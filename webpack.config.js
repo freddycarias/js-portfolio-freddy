@@ -33,6 +33,13 @@ module.exports = {
                     'stylus-loader'
                 ],
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[hash][ext][query]',
+                },
+            },
         ]
     },
     plugins:[
