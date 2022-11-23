@@ -2,12 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+//SE PUEDEN UTILIZAR PERO YA QUE EN Webpack 5 YA LO TRAE,Segun la documentación oficial de webpack nos comunica que actualmente terser-webpack-plugin viene incluido desde webpack 5 
+// const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
+        filename: '[name].[contenthash].js',
         assetModuleFilename: 'assets/images/[hash][ext]',
     },
     resolve: {
@@ -53,7 +56,9 @@ module.exports = {
             template: './public/index.html',
             filename: './index.html'
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "assets/[name][contenthash].css"
+        }),
         new CopyPlugin({
             patterns:[
                 {
@@ -62,5 +67,8 @@ module.exports = {
                 }
             ]
         }),
-    ]
+    ],
+    optimization: {
+        minimize: true
+    }
 }
