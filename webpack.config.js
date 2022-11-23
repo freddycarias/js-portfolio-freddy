@@ -2,9 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+// const { utils } = require('stylus');
 //SE PUEDEN UTILIZAR PERO YA QUE EN Webpack 5 YA LO TRAE,Segun la documentación oficial de webpack nos comunica que actualmente terser-webpack-plugin viene incluido desde webpack 5 
 // const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // const TerserPlugin = require("terser-webpack-plugin")
+const Dotenv = require("dotenv-webpack");
+
 
 module.exports = {
     entry: './src/index.js',
@@ -74,6 +77,7 @@ module.exports = {
                 }
             ]
         }),
+        new Dotenv(),
     ],
     optimization: {
         minimize: true
