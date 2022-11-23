@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -21,7 +22,16 @@ module.exports = {
                 },
                 // Exclude permite omitir archivos o carpetas especificas
                 exclude: /node_modules/
-            }
+            },
+            {
+                test:/\.css|.styl$/i,
+                use:
+                [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'stylus-loader'
+                ],
+            },
         ]
     },
     plugins:[
@@ -30,5 +40,6 @@ module.exports = {
             template:'./public/index.html',
             filename:'./index.html'
         }),
+        new MiniCssExtractPlugin(),
     ]
 }
